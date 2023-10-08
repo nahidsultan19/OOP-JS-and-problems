@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Load TensorFlow.js. This is required to use the qna model. -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+
+
+    <!-- Load the qna model. -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"></script>
+
+
+</head>
+
+<body>
+    <!-- Use the script tag to place your code or use an external .js file -->
+
+    <script>
+
+        // Define question and answer as simple strings
+
+        var searchText = 'We believe cats are the real stars of YouTube.';
+
+        var question = 'What is important to YouTube?'; // Cats!
+
+
+        // Load the model asynchronously using the "then" keyword.
+
+        qna.load().then(model => {
+
+            // Call model.findAnwers() with the question and passage as parameters
+
+            model.findAnswers(question, searchText).then(answers => {
+
+                console.log('Answers: ', answers);
+
+            });
+
+        });
+
+
+
+        async function calculateInferenceSpeed() {
+
+            //  Record timestamp before model execution
+
+            const timeStart = performance.now();
+
+            // Execute model
+
+            let results = await useSomeModel();
+
+            // Record timestamp after model execution
+
+            const timeEnd = performance.now();
+
+            // Calculate time taken for model execution
+
+            const timeTaken = timeEnd - timeStart;
+
+            console.log(`Time taken ${timeTaken} ms.`);
+
+            // Convert ms to FPS
+
+            console.log(`Frames per sec: ${1000 / timeTaken}`);
+
+        };
+        calculateInferenceSpeed();
+
+    </script>
+</body>
+
+</html>
